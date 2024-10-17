@@ -17,7 +17,7 @@ public class MixinPlayer {
             cancellable = true
     )
     private void isReducedDebugInfo(CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.forceDebugInfoDetailed) {
+        if (Configs.forceDebugInfoDetailed.getBooleanValue()) {
             cir.setReturnValue(false);
         }
     }

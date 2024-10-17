@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.config.Configs;
 //#else
-//$$ import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+//$$ import top.hendrixshen.magiclib.api.preprocess.DummyClass;
 //#endif
 
 //#if MC > 11605
@@ -45,7 +45,7 @@ public abstract class MixinGui {
     //#else
     //$$ private void onRenderPowderSnowOverlay(ResourceLocation resourceLocation, float f, CallbackInfo ci) {
     //#endif
-        if (Configs.disableRenderOverlayPowderSnow && resourceLocation.equals(POWDER_SNOW_OUTLINE_LOCATION)) {
+        if (Configs.disableRenderOverlayPowderSnow.getBooleanValue() && resourceLocation.equals(POWDER_SNOW_OUTLINE_LOCATION)) {
             ci.cancel();
         }
     }

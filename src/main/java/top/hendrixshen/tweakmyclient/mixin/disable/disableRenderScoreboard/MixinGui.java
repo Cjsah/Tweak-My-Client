@@ -30,7 +30,7 @@ public abstract class MixinGui {
     //#else
     //$$ private void onRenderScoreboardSidebar(Objective objective, CallbackInfo ci) {
     //#endif
-        if (Configs.disableRenderScoreboard) {
+        if (Configs.disableRenderScoreboard.getBooleanValue()) {
             ci.cancel();
         }
     }

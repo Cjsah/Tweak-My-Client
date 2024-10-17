@@ -33,7 +33,7 @@ public abstract class MixinItemStack {
             cancellable = true
     )
     private void isFoil(CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.disableItemGlowing) {
+        if (Configs.disableItemGlowing.getBooleanValue()) {
             //#if MC > 11902
             String itemStackID = BuiltInRegistries.ITEM.getKey(this.getItem()).toString();
             //#else
@@ -41,7 +41,7 @@ public abstract class MixinItemStack {
             //#endif
             String itemStackName = this.getDisplayName().getString();
             if (Cache.getInstance().getItemGlowingBlackList().contains(this.getItem()) ||
-                    Configs.listItemGlowingBlacklist.stream().anyMatch((s -> itemStackID.contains(s) || itemStackName.contains(s)))) {
+                    Configs.listItemGlowingBlacklist.getStrings().stream().anyMatch((s -> itemStackID.contains(s) || itemStackName.contains(s)))) {
                 cir.setReturnValue(false);
             }
         }

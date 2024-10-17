@@ -6,8 +6,8 @@ import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.util.AutoReconnectUtil;
 
@@ -16,7 +16,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import org.jetbrains.annotations.NotNull;
 //#endif
 
-@Dependencies(and = @Dependency("notenoughcrashes"))
+@Dependencies(require = @Dependency("notenoughcrashes"))
 @Mixin(value = ProblemScreen.class)
 public abstract class MixinProblemScreen extends Screen {
     protected MixinProblemScreen(Component component) {

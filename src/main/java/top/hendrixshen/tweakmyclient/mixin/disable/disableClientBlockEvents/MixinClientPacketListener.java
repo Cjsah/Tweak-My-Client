@@ -18,7 +18,7 @@ public class MixinClientPacketListener {
             cancellable = true
     )
     private void onHandleBlockEvent(ClientboundBlockEventPacket clientboundBlockEventPacket, CallbackInfo ci) {
-        if (Configs.disableClientBlockEvents) {
+        if (Configs.disableClientBlockEvents.getBooleanValue()) {
             ci.cancel();
         }
     }

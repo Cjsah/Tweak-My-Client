@@ -29,7 +29,7 @@ public class MixinGui {
     //#else
     //$$ private void onRender(CallbackInfo ci) {
     //#endif
-        if (Configs.disableRenderEffectBox) {
+        if (Configs.disableRenderEffectBox.getBooleanValue()) {
             ci.cancel();
         }
     }

@@ -41,7 +41,7 @@ public class PatchedDisconnectedScreen extends Screen {
     private final Screen parent;
     private int textHeight;
     private Button autoReconnectButton;
-    private int reconnectTimer = Configs.autoReconnectTimer * 20;
+    private int reconnectTimer = Configs.autoReconnectTimer.getIntegerValue() * 20;
     private final LinkedHashMap<String, Screen> modHashMap = Maps.newLinkedHashMap();
 
     public PatchedDisconnectedScreen(Screen parent, Component title, Component reason) {
@@ -117,7 +117,7 @@ public class PatchedDisconnectedScreen extends Screen {
     @Override
     //#if MC > 11904
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        if (Configs.expXiBao) {
+        if (Configs.expXiBao.getBooleanValue()) {
             AutoReconnectUtil.renderXibao(this);
         } else {
             this.renderBackground(
@@ -166,7 +166,7 @@ public class PatchedDisconnectedScreen extends Screen {
 
     @Override
     public void tick() {
-        if (!Configs.featureAutoReconnect) {
+        if (!Configs.featureAutoReconnect.getBooleanValue()) {
             //#if MC > 11502
             this.autoReconnectButton.setMessage(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")));
             //#else
@@ -265,10 +265,10 @@ public class PatchedDisconnectedScreen extends Screen {
     }
 
     private void onPressAutoReconnect(Button button) {
-        TweakMyClientReference.getConfigHandler().configManager.setValue("featureAutoReconnect", !Configs.featureAutoReconnect);
+        TweakMyClientReference.getConfigHandler().configManager.setValue("featureAutoReconnect", !Configs.featureAutoReconnect.getBooleanValue());
 
-        if (Configs.featureAutoReconnect) {
-            this.reconnectTimer = Configs.autoReconnectTimer * 20;
+        if (Configs.featureAutoReconnect.getBooleanValue()) {
+            this.reconnectTimer = Configs.autoReconnectTimer.getIntegerValue() * 20;
         }
     }
 }

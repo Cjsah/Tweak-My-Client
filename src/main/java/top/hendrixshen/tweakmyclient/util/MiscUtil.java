@@ -80,7 +80,7 @@ public class MiscUtil extends top.hendrixshen.magiclib.util.MiscUtil {
                     return Shapes.or(shape, connectBlock.getShape(clientLevel, blockPos.relative(direction.getOpposite())).move(direction.getOpposite().getStepX(), direction.getOpposite().getStepY(), direction.getOpposite().getStepZ()));
                 }
             //#if MC >= 11700
-            } else if (blockState.getBlock() instanceof PointedDripstoneBlock && Configs.expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock) {
+            } else if (blockState.getBlock() instanceof PointedDripstoneBlock && Configs.expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock.getBooleanValue()) {
                 Direction direction = blockState.getValue(PointedDripstoneBlock.TIP_DIRECTION);
                 BlockPos connectBlockPos = blockPos.above();
 

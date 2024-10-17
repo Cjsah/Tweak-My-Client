@@ -53,8 +53,8 @@ public abstract class MixinEnderDragonRenderer extends EntityRenderer<EnderDrago
     //#else
     //$$ private void onRenderCrystalBeams(EnderDragon enderDragon, double d, double e, double f, float g, float h, CallbackInfo ci) {
     //#endif
-        if (Configs.disableCrystalBeams) {
-            if (Configs.crystalBeamsDisableMode == CrystalBeamsDisableMode.FIXED) {
+        if (Configs.disableCrystalBeams.getBooleanValue()) {
+            if (Configs.crystalBeamsDisableMode.getOptionListValue() == CrystalBeamsDisableMode.FIXED) {
                 return;
             }
 

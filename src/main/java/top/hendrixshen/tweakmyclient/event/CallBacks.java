@@ -1,5 +1,8 @@
 package top.hendrixshen.tweakmyclient.event;
 
+import fi.dy.masa.malilib.config.IConfigBase;
+import fi.dy.masa.malilib.config.IConfigValue;
+import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
 import net.minecraft.client.Minecraft;
@@ -22,6 +25,7 @@ import top.hendrixshen.tweakmyclient.TweakMyClientConfigGui;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.helper.BreakAnimationMode;
+import top.hendrixshen.tweakmyclient.helper.TargetBlockPositionPrintMode;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 import top.hendrixshen.tweakmyclient.util.InventoryUtil;
 
@@ -47,21 +51,21 @@ public class CallBacks {
         MultiPlayerGameMode multiPlayerGameMode = minecraft.gameMode;
 
         if (cameraEntity != null && multiPlayerGameMode != null) {
-            HitResult hitResult = cameraEntity.pick(Configs.targetBlockMaxTraceDistance, minecraft.getFrameTime(), false);
+            HitResult hitResult = cameraEntity.pick(Configs.targetBlockMaxTraceDistance.getIntegerValue(), minecraft.getFrameTime(), false);
 
             if (hitResult.getType() == HitResult.Type.BLOCK) {
                 BlockPos blockPos = ((BlockHitResult) hitResult).getBlockPos();
-                String str = Configs.targetBlockPositionFormat;
+                String str = Configs.targetBlockPositionFormat.getStringValue();
                 str = str.replace("{X}", String.format("%d", blockPos.getX()));
                 str = str.replace("{Y}", String.format("%d", blockPos.getY()));
                 str = str.replace("{Z}", String.format("%d", blockPos.getZ()));
 
                 if (minecraft.player != null) {
-                    switch (Configs.targetBlockPositionPrintMode) {
-                        case PUBLIC:
+                    switch (Configs.targetBlockPositionPrintMode.getOptionListValue()) {
+                        case TargetBlockPositionPrintMode.PUBLIC:
                             InfoUtil.sendChat(str);
                             break;
-                        case PRIVATE:
+                        case TargetBlockPositionPrintMode.PRIVATE:
                             InfoUtil.displayChatMessage(ComponentCompatApi.literal(str));
                             break;
                     }
@@ -95,12 +99,12 @@ public class CallBacks {
         return true;
     }
 
-    public static void debugExperimentalModeCallBack(ConfigOption option) {
+    public static void debugExperimentalModeCallBack(IConfigBase option) {
         reDrawConfigGui(option);
     }
 
-    public static void debugModeCallBack(ConfigOption option) {
-        Configurator.setLevel(TweakMyClientReference.getModIdentifier(), Configs.debugMode ? Level.DEBUG : Level.INFO);
+    public static void debugModeCallBack(IConfigBase option) {
+        Configurator.setLevel(TweakMyClientReference.getModIdentifier(), Configs.debugMode.getBooleanValue() ? Level.DEBUG : Level.INFO);
         reDrawConfigGui(option);
     }
 
@@ -133,28 +137,28 @@ public class CallBacks {
         return true;
     }
 
-    public static void disableRenderToastCallback(ConfigOption option) {
-        if (Configs.disableRenderToast) {
+    public static void disableRenderToastCallback(IConfigBase option) {
+        if (Configs.disableRenderToast.getBooleanValue()) {
             TweakMyClient.getMinecraftClient().getToasts().clear();
         }
     }
 
-    public static void featureCustomBlockHitBoxOverlayFillCallBack(ConfigOption option) {
-        if (!(Configs.featureCustomBlockHitBoxOverlayFill && Configs.featureCustomBlockHitBoxOverlayOutline)) {
+    public static void featureCustomBlockHitBoxOverlayFillCallBack(IConfigBase option) {
+        if (!(Configs.featureCustomBlockHitBoxOverlayFill.getBooleanValue() && Configs.featureCustomBlockHitBoxOverlayOutline.getBooleanValue())) {
             TweakMyClientReference.getConfigHandler().configManager.setValue("breakAnimationMode", BreakAnimationMode.NONE);
             reDrawConfigGui(option);
         }
     }
 
-    public static void featureCustomBlockHitBoxOverlayOutlineCallBack(ConfigOption option) {
-        if (!(Configs.featureCustomBlockHitBoxOverlayFill && Configs.featureCustomBlockHitBoxOverlayOutline)) {
+    public static void featureCustomBlockHitBoxOverlayOutlineCallBack(IConfigBase option) {
+        if (!(Configs.featureCustomBlockHitBoxOverlayFill.getBooleanValue() && Configs.featureCustomBlockHitBoxOverlayOutline.getBooleanValue())) {
             TweakMyClientReference.getConfigHandler().configManager.setValue("breakAnimationMode", BreakAnimationMode.NONE);
             reDrawConfigGui(option);
         }
     }
 
-    public static void featureCustomWindowTitleCallback(ConfigOption option) {
-        if (Configs.featureCustomWindowTitle) {
+    public static void featureCustomWindowTitleCallback(IConfigBase option) {
+        if (Configs.featureCustomWindowTitle.getBooleanValue()) {
             //#if MC >= 11500
             CustomWindowUtil.rebuildCache(CustomWindowUtil.TitleType.TITLE);
             CustomWindowUtil.rebuildCache(CustomWindowUtil.TitleType.TITLE_WITH_ACTIVITY);
@@ -177,19 +181,19 @@ public class CallBacks {
         return true;
     }
 
-    private static void reDrawConfigGui(ConfigOption option) {
+    private static void reDrawConfigGui(IConfigBase option) {
         if (option != null) {
             TweakMyClientConfigGui.getInstance().reDraw();
         }
     }
 
-    public static void customWindowTitleEnableActivityCallback(ConfigOption option) {
+    public static void customWindowTitleEnableActivityCallback(ConfigBoolean option) {
         CallBacks.featureCustomWindowTitleCallback(option);
         CallBacks.reDrawConfigGui(option);
     }
 
     public static boolean expNullPointerExceptionTestCallback(KeyAction keyAction, IKeybind iKeybind) {
-        if (Configs.debugMode && Configs.debugExperimentalMode) {
+        if (Configs.debugMode.getBooleanValue() && Configs.debugExperimentalMode.getBooleanValue()) {
             throw new NullPointerException("Test NullPointerException!");
         }
 
@@ -197,7 +201,7 @@ public class CallBacks {
     }
 
     public static boolean expUnsafeIllegalAllocateTestCallback(KeyAction keyAction, IKeybind iKeybind) {
-        if (Configs.debugMode && Configs.debugExperimentalMode && CallBacks.UNSAFE != null) {
+        if (Configs.debugMode.getBooleanValue() && Configs.debugExperimentalMode.getBooleanValue() && CallBacks.UNSAFE != null) {
             CallBacks.UNSAFE.putAddress(0, 0);
         }
 

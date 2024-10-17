@@ -25,7 +25,7 @@ public abstract class MixinMinecraft {
             cancellable = true
     )
     private void onCreateTitle(CallbackInfoReturnable<String> cir) {
-        if (Configs.featureCustomWindowTitle) {
+        if (Configs.featureCustomWindowTitle.getBooleanValue()) {
             cir.setReturnValue(CustomWindowUtil.getWindowTitle());
         }
     }
@@ -53,7 +53,7 @@ public abstract class MixinMinecraft {
             )
     )
     private void onRunTick(CallbackInfo ci) {
-        if (Configs.featureCustomWindowTitle) {
+        if (Configs.featureCustomWindowTitle.getBooleanValue()) {
             CustomWindowUtil.updateTitle();
         }
     }

@@ -36,7 +36,7 @@ public abstract class MixinEntityRenderDispatcher {
     //#else
     //$$ private void onShouldRender(Entity entity, Culler culler, double d, double e, double f, CallbackInfoReturnable<Boolean> cir) {
     //#endif
-        if (Configs.disableClientEntityInListRendering) {
+        if (Configs.disableClientEntityInListRendering.getBooleanValue()) {
             //#if MC > 11902
             String entityID = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
             //#else
@@ -44,14 +44,14 @@ public abstract class MixinEntityRenderDispatcher {
             //#endif
             String entityName = entity.getName().getString();
 
-            if (Configs.listDisableClientEntityRendering.stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s)) && !(entity instanceof Player)) {
+            if (Configs.listDisableClientEntityRendering.getStrings().stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s)) && !(entity instanceof Player)) {
                 cir.setReturnValue(false);
             }
         }
 
-        if ((Configs.disableClientEntityTNTUpdates && entity.getType() == EntityType.TNT)
-                || (Configs.disableClientEntityWitherUpdates && entity.getType() == EntityType.WITHER)
-                || (Configs.disableClientEntityZombieVillagerUpdates && entity.getType() == EntityType.ZOMBIE_VILLAGER)) {
+        if ((Configs.disableClientEntityTNTUpdates.getBooleanValue() && entity.getType() == EntityType.TNT)
+                || (Configs.disableClientEntityWitherUpdates.getBooleanValue() && entity.getType() == EntityType.WITHER)
+                || (Configs.disableClientEntityZombieVillagerUpdates.getBooleanValue() && entity.getType() == EntityType.ZOMBIE_VILLAGER)) {
             cir.setReturnValue(false);
         }
     }

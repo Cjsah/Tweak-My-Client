@@ -33,7 +33,7 @@ public class MixinEntity {
             )
     )
     private Vec3 onGetStuckSpeedMultiplier(Entity instance) {
-        return Configs.disableSlowdown && instance instanceof LocalPlayer ? Vec3.ZERO : this.stuckSpeedMultiplier;
+        return Configs.disableSlowdown.getBooleanValue() && instance instanceof LocalPlayer ? Vec3.ZERO : this.stuckSpeedMultiplier;
     }
 
     //#if MC > 11404
@@ -47,7 +47,7 @@ public class MixinEntity {
             cancellable = true
     )
     private void onGetBlockSpeedFactor(CallbackInfoReturnable<Float> cir) {
-        if (Configs.disableSlowdown && MiscUtil.cast(this) instanceof LocalPlayer && cir.getReturnValueF() < 1.0F) {
+        if (Configs.disableSlowdown.getBooleanValue() && MiscUtil.cast(this) instanceof LocalPlayer && cir.getReturnValueF() < 1.0F) {
             cir.setReturnValue(1.0F);
         }
     }

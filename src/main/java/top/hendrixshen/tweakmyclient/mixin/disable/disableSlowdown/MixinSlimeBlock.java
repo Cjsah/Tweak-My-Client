@@ -38,7 +38,7 @@ public class MixinSlimeBlock extends Block {
     //#else
     //$$ private void updateEntityAfterFallOn(BlockGetter blockGetter, Entity entity, CallbackInfo ci) {
     //#endif
-        if (Configs.disableSlowdown && entity instanceof LocalPlayer) {
+        if (Configs.disableSlowdown.getBooleanValue() && entity instanceof LocalPlayer) {
             Vec3 vec3 = entity.getDeltaMovement();
 
             if (vec3.y < 0 && vec3.y > -0.0792) { // Vertical momentum at 2x steady state.

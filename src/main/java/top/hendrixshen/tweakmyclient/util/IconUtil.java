@@ -122,7 +122,7 @@ public class IconUtil {
         ArrayList<InputStream> inputStreams = new ArrayList<>(5);
 
         try {
-            if (Configs.featureCustomWindowIcon) {
+            if (Configs.featureCustomWindowIcon.getBooleanValue()) {
                 IconUtil.pushResource(inputStreams, TMC_STABLE_16X, TMC_SNAPSHOT_16X);
                 IconUtil.pushResource(inputStreams, TMC_STABLE_32X, TMC_SNAPSHOT_32X);
                 IconUtil.pushResource(inputStreams, TMC_STABLE_48X, TMC_SNAPSHOT_48X);

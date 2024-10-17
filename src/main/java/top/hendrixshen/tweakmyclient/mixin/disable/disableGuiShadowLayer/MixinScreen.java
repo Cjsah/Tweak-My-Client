@@ -55,7 +55,7 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             //#endif
             CallbackInfo ci
     ) {
-        if (Configs.disableGuiShadowLayer) {
+        if (Configs.disableGuiShadowLayer.getBooleanValue()) {
             ci.cancel();
         }
     }

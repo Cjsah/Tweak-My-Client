@@ -31,7 +31,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             )
     )
     private void onTick(CallbackInfo ci) {
-        if (Configs.featureAutoTotem) {
+        if (Configs.featureAutoTotem.getBooleanValue()) {
             Minecraft mc = TweakMyClient.getMinecraftClient();
 
             if (mc.player == null || mc.player.getOffhandItem().isCompat(Items.TOTEM_OF_UNDYING) || mc.gameMode == null ||

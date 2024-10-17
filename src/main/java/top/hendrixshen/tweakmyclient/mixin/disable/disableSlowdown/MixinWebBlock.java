@@ -23,7 +23,7 @@ public class MixinWebBlock {
             cancellable = true
     )
     private void onWalkInCobWebBlock(BlockState blockState, Level level, BlockPos blockPos, Entity entity, CallbackInfo ci) {
-        if ((Configs.disableSlowdown) && entity instanceof LocalPlayer) {
+        if ((Configs.disableSlowdown.getBooleanValue()) && entity instanceof LocalPlayer) {
             ci.cancel();
         }
     }

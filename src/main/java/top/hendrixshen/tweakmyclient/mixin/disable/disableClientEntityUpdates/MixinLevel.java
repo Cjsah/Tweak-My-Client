@@ -28,7 +28,7 @@ public class MixinLevel {
             cancellable = true
     )
     private void onGuardEntityTick(Consumer<Entity> consumer, Entity entity, CallbackInfo ci) {
-        if (Configs.disableClientEntityInListUpdates) {
+        if (Configs.disableClientEntityInListUpdates.getBooleanValue()) {
             //#if MC > 11902
             String entityID = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
             //#else
@@ -36,15 +36,15 @@ public class MixinLevel {
             //#endif
             String entityName = entity.getName().getString();
 
-            if (Configs.listDisableClientEntityUpdates.stream().anyMatch(s -> entityID.contains(s) ||
+            if (Configs.listDisableClientEntityUpdates.getStrings().stream().anyMatch(s -> entityID.contains(s) ||
                     entityName.contains(s)) && !(entity instanceof Player)) {
                 ci.cancel();
             }
         }
 
-        if ((Configs.disableClientEntityTNTRendering && entity.getType() == EntityType.TNT) ||
-                (Configs.disableClientEntityWitherRendering && entity.getType() == EntityType.WITHER) ||
-                (Configs.disableClientEntityZombieVillagerRendering && entity.getType() == EntityType.ZOMBIE_VILLAGER)) {
+        if ((Configs.disableClientEntityTNTRendering.getBooleanValue() && entity.getType() == EntityType.TNT) ||
+                (Configs.disableClientEntityWitherRendering.getBooleanValue() && entity.getType() == EntityType.WITHER) ||
+                (Configs.disableClientEntityZombieVillagerRendering.getBooleanValue() && entity.getType() == EntityType.ZOMBIE_VILLAGER)) {
             ci.cancel();
         }
     }

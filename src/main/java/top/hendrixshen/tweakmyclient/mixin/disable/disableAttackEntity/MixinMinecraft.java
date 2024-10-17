@@ -57,7 +57,7 @@ public class MixinMinecraft {
             //#endif
             String entityName = entity.getName().getString();
 
-            if (Configs.disableAttackEntity && Configs.listDisableAttackEntity.stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s))) {
+            if (Configs.disableAttackEntity.getBooleanValue() && Configs.listDisableAttackEntity.getStrings().stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s))) {
                 player.swing(InteractionHand.MAIN_HAND);
                 //#if MC > 11701
                 cir.setReturnValue(false);

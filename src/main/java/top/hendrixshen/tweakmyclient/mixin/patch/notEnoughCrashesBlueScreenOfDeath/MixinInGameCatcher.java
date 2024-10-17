@@ -6,8 +6,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.util.notenoughcrashes.BlueScreen;
@@ -16,7 +16,7 @@ import top.hendrixshen.tweakmyclient.util.notenoughcrashes.BlueScreen;
 import org.jetbrains.annotations.NotNull;
 //#endif
 
-@Dependencies(and = @Dependency("notenoughcrashes"))
+@Dependencies(require = @Dependency("notenoughcrashes"))
 @Mixin(InGameCatcher.class)
 public class MixinInGameCatcher {
     @Inject(
@@ -32,7 +32,7 @@ public class MixinInGameCatcher {
     //#else
     //$$ private static void replaceScreen(CrashReport report, CallbackInfo ci) {
     //#endif
-        if (Configs.notEnoughCrashesBlueScreenOfDeath) {
+        if (Configs.notEnoughCrashesBlueScreenOfDeath.getBooleanValue()) {
             TweakMyClient.getMinecraftClient().setScreen(new BlueScreen(report));
             ci.cancel();
         }

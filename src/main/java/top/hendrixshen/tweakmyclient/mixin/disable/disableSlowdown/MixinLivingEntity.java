@@ -45,7 +45,7 @@ public abstract class MixinLivingEntity extends Entity {
             ordinal = 0
     )
     private float onGetFriction(float f) {
-        if (Configs.disableSlowdown && MiscUtil.cast(this) instanceof LocalPlayer && !this.isInWater() && f > 0.6F) {
+        if (Configs.disableSlowdown.getBooleanValue() && MiscUtil.cast(this) instanceof LocalPlayer && !this.isInWater() && f > 0.6F) {
             return 0.6F;
         }
 

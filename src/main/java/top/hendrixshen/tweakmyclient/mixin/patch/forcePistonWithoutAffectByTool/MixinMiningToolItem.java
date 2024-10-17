@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.tweakmyclient.config.Configs;
 //#else
 //$$ import net.minecraft.client.Minecraft;
-//$$ import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+//$$ import top.hendrixshen.magiclib.api.preprocess.DummyClass;
 //#endif
 
 //#if MC > 11502
@@ -32,7 +32,7 @@ public class MixinMiningToolItem {
             cancellable = true
     )
     private void onGetMiningSpeedMultiplier(ItemStack itemStack, BlockState blockState, CallbackInfoReturnable<Float> cir) {
-        if (Configs.forcePistonWithoutAffectByTool && (blockState.getBlock() instanceof PistonBaseBlock || blockState.getBlock() instanceof MovingPistonBlock || blockState.getBlock() instanceof PistonHeadBlock)) {
+        if (Configs.forcePistonWithoutAffectByTool.getBooleanValue() && (blockState.getBlock() instanceof PistonBaseBlock || blockState.getBlock() instanceof MovingPistonBlock || blockState.getBlock() instanceof PistonHeadBlock)) {
             cir.setReturnValue(1.0F);
         }
     }

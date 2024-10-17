@@ -17,6 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.lwjgl.opengl.GL11;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.helper.BreakAnimationMode;
 import top.hendrixshen.tweakmyclient.mixin.accessor.MultiPlayerGameModeAccessor;
 import top.hendrixshen.tweakmyclient.util.MiscUtil;
 
@@ -45,15 +46,15 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
         BlockState blockState = clientLevel.getBlockState(blockPos);
         VoxelShape voxelShape = blockState.getShape(clientLevel, blockHitResult.getBlockPos(), CollisionContext.of(cameraEntity));
 
-        if (Configs.customBlockHitBoxOverlayLinkedAdapter) {
+        if (Configs.customBlockHitBoxOverlayLinkedAdapter.getBooleanValue()) {
             voxelShape = MiscUtil.linkedBlockAdapter(clientLevel, blockState, blockPos, voxelShape);
         }
 
         // Adjust AABB for break animation.
         final float destroyProgress = ((MultiPlayerGameModeAccessor) multiPlayerGameMode).getDestroyProgress();
 
-        switch (Configs.breakAnimationMode) {
-            case DOWN:
+        switch (Configs.breakAnimationMode.getOptionListValue()) {
+            case BreakAnimationMode.DOWN:
                 voxelShape = voxelShape.toAabbs().stream()
                         .map(box -> box.inflate(0, - box.getYsize() * destroyProgress / 2, 0)
                                 .move(0, -box.getYsize() * destroyProgress / 2, 0))
@@ -61,7 +62,7 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
                         .reduce(Shapes::or)
                         .orElse(Shapes.empty()).optimize();
                 break;
-            case SHRINK:
+            case BreakAnimationMode.SHRINK:
                 voxelShape = voxelShape.toAabbs().stream()
                         .map(box -> box.inflate(box.getXsize() * destroyProgress / 2,
                                 box.getYsize() * destroyProgress / 2,
@@ -70,7 +71,7 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
                         .reduce(Shapes::or)
                         .orElse(Shapes.empty()).optimize();
                 break;
-            case NONE:
+            case BreakAnimationMode.NONE:
             default:
                 voxelShape = voxelShape.toAabbs().stream()
                         .map(Shapes::create)
@@ -80,10 +81,10 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
 
         Vec3 vec3 = TweakMyClient.getMinecraftClient().gameRenderer.getMainCamera().getPosition();
 
-        if (Configs.featureCustomBlockHitBoxOverlayFill) {
-            float k = System.currentTimeMillis() % (100 * (101 - Configs.customBlockHitBoxOverlayFillRainbowSpeed)) / (50F * (101 - Configs.customBlockHitBoxOverlayFillRainbowSpeed));
+        if (Configs.featureCustomBlockHitBoxOverlayFill.getBooleanValue()) {
+            float k = System.currentTimeMillis() % (100 * (101 - Configs.customBlockHitBoxOverlayFillRainbowSpeed.getIntegerValue())) / (50F * (101 - Configs.customBlockHitBoxOverlayFillRainbowSpeed.getIntegerValue()));
 
-            if (Configs.customBlockHitBoxOverlayDisableDepthTest) {
+            if (Configs.customBlockHitBoxOverlayDisableDepthTest.getBooleanValue()) {
                 RenderSystem.disableDepthTest();
             }
 
@@ -91,23 +92,23 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
             GL11.glPolygonOffset(-1.0F, -1.0F);
             RenderUtil.renderShapeOverlay(voxelShape,
                     blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z(),
-                    Configs.customBlockHitBoxOverlayFillRainbow ? new Color4f(
+                    Configs.customBlockHitBoxOverlayFillRainbow.getBooleanValue() ? new Color4f(
                             0.5F + 0.5F * (float) Math.sin(k * Math.PI),
                             0.5F + 0.5F * (float) Math.sin((k + 4F / 3F) * Math.PI),
                             0.5F + 0.5F * (float) Math.sin((k + 8F / 3F) * Math.PI),
-                            Configs.colorBlockHitBoxOverlayFill.a
-                    ) : Configs.colorBlockHitBoxOverlayFill);
+                            Configs.colorBlockHitBoxOverlayFill.getColor().a
+                    ) : Configs.colorBlockHitBoxOverlayFill.getColor());
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
 
-            if (Configs.customBlockHitBoxOverlayDisableDepthTest) {
+            if (Configs.customBlockHitBoxOverlayDisableDepthTest.getBooleanValue()) {
                 RenderSystem.enableDepthTest();
             }
         }
 
-        if (Configs.featureCustomBlockHitBoxOverlayOutline) {
-            float k = System.currentTimeMillis() % (100 * (101 - Configs.customBlockHitBoxOverlayOutlineRainbowSpeed)) / (50F * (101 - Configs.customBlockHitBoxOverlayOutlineRainbowSpeed));
+        if (Configs.featureCustomBlockHitBoxOverlayOutline.getBooleanValue()) {
+            float k = System.currentTimeMillis() % (100 * (101 - Configs.customBlockHitBoxOverlayOutlineRainbowSpeed.getIntegerValue())) / (50F * (101 - Configs.customBlockHitBoxOverlayOutlineRainbowSpeed.getIntegerValue()));
 
-            if (Configs.customBlockHitBoxOverlayDisableDepthTest) {
+            if (Configs.customBlockHitBoxOverlayDisableDepthTest.getBooleanValue()) {
                 RenderSystem.disableDepthTest();
             }
 
@@ -115,14 +116,14 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
             GL11.glPolygonOffset(-1.0F, -1.0F);
             RenderUtil.renderShapeOutline(voxelShape,
                     blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z(),
-                    Configs.customBlockHitBoxOverlayOutlineRainbow ? new Color4f(
+                    Configs.customBlockHitBoxOverlayOutlineRainbow.getBooleanValue() ? new Color4f(
                             0.5F + 0.5F * (float) Math.sin(k * Math.PI),
                             0.5F + 0.5F * (float) Math.sin((k + 2F / 3F) * Math.PI),
                             0.5F + 0.5F * (float) Math.sin((k + 6F / 3F) * Math.PI),
-                            Configs.colorBlockHitBoxOverlayOutline.a
-                    ) : Configs.colorBlockHitBoxOverlayOutline);
+                            Configs.colorBlockHitBoxOverlayOutline.getColor().a
+                    ) : Configs.colorBlockHitBoxOverlayOutline.getColor());
 
-            if (Configs.customBlockHitBoxOverlayDisableDepthTest) {
+            if (Configs.customBlockHitBoxOverlayDisableDepthTest.getBooleanValue()) {
                 RenderSystem.enableDepthTest();
             }
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
@@ -131,7 +132,7 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
 
     @Override
     public boolean shouldRender() {
-        return (Configs.featureCustomBlockHitBoxOverlayFill || Configs.featureCustomBlockHitBoxOverlayOutline) &&
+        return (Configs.featureCustomBlockHitBoxOverlayFill.getBooleanValue() || Configs.featureCustomBlockHitBoxOverlayOutline.getBooleanValue()) &&
                 TweakMyClient.getMinecraftClient().hitResult != null;
     }
 }

@@ -21,6 +21,11 @@ repositories {
     mavenLocal()
 
     maven {
+        name("NyanMaven")
+        url("https://maven.hendrixshen.top/releases")
+    }
+
+    maven {
         name("Curse Maven")
         url("https://www.cursemaven.com")
 
@@ -83,7 +88,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
 
     // Dependency
-    modImplementation("top.hendrixshen.magiclib:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
+    modImplementation("top.hendrixshen.magiclib:magiclib-all-${project.minecraft_version}-fabric:${project.magiclib_version}") {
         if (project.isCIEnvironment()) {
             exclude(group: "net.fabricmc.fabric-api", module: "fabric-api")
         }
@@ -307,7 +312,10 @@ processResources {
 }
 
 java {
-    if (mcVersion > 11701) {
+    if (mcVersion > 12100) {
+        sourceCompatibility(JavaVersion.VERSION_21)
+        targetCompatibility(JavaVersion.VERSION_21)
+    } else if (mcVersion > 11701) {
         sourceCompatibility(JavaVersion.VERSION_16)
         targetCompatibility(JavaVersion.VERSION_16)
     } else {

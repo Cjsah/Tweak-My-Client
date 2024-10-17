@@ -20,7 +20,7 @@ public abstract class MixinPlayer {
             cancellable = true
     )
     private void isSwimming(CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.disableSwimming && MiscUtil.cast(this) instanceof LocalPlayer) {
+        if (Configs.disableSwimming.getBooleanValue() && MiscUtil.cast(this) instanceof LocalPlayer) {
             cir.setReturnValue(false);
         }
     }

@@ -22,7 +22,7 @@ public abstract class MixinLevelRenderer {
             )
     )
     private void onProcessGlobalEvent(int eventId, BlockPos pos, int i, CallbackInfo ci) {
-        if (Configs.featureGlobalEventListener) {
+        if (Configs.featureGlobalEventListener.getBooleanValue()) {
             LocalPlayer player = TweakMyClient.getMinecraftClient().player;
 
             if (player != null) {

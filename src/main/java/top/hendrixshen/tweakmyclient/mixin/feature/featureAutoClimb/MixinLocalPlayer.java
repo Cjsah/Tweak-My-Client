@@ -25,7 +25,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
     )
     private void onAiStep(CallbackInfo ci) {
         //#if MC > 11502
-        if (Configs.featureAutoClimb && this.onClimbable() && this.getXRotCompat() <= -50f && !this.isCrouching()) {
+        if (Configs.featureAutoClimb.getBooleanValue() && this.onClimbable() && this.getXRotCompat() <= -50f && !this.isCrouching()) {
         //#elseif MC > 11404
         //$$ if (Configs.featureAutoClimb && this.onLadder() && this.getXRotCompat() <= -50f && !this.isCrouching()) {
         //#else

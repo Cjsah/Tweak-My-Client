@@ -43,16 +43,14 @@ public class MixinMultiPlayerGameMode {
     }
 
     private boolean tmc$shouldLimit(BlockPos pos) {
-        if (!Configs.featureBreakingRestrictionBox) {
+        if (!Configs.featureBreakingRestrictionBox.getBooleanValue()) {
             return false;
         }
 
-        BreakingRestrictionBoxType mode = Configs.listBreakingRestrictionBoxType;
-
-        switch (mode) {
-            case BLACKLIST:
+        switch (Configs.listBreakingRestrictionBoxType.getOptionListValue()) {
+            case BreakingRestrictionBoxType.BLACKLIST:
                 return this.tmc$inAreas(Cache.getInstance().getBreakingRestrictionBoxBlacklist(), pos);
-            case WHITELIST:
+            case BreakingRestrictionBoxType.WHITELIST:
                 return !this.tmc$inAreas(Cache.getInstance().getBreakingRestrictionBoxWhiteList(), pos);
             default:
                 return false;

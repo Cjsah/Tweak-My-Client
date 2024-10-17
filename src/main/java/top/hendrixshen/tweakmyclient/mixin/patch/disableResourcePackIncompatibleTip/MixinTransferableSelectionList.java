@@ -17,7 +17,7 @@ public class MixinTransferableSelectionList {
             )
     )
     private boolean disableIncompatibleTipLabel(PackCompatibility packCompatibility) {
-        return Configs.disableResourcePackIncompatibleTip || packCompatibility.isCompatible();
+        return Configs.disableResourcePackIncompatibleTip.getBooleanValue() || packCompatibility.isCompatible();
     }
 
     @Redirect(
@@ -32,6 +32,6 @@ public class MixinTransferableSelectionList {
             )
     )
     private boolean disableIncompatibleTipScreen(PackCompatibility packCompatibility) {
-        return Configs.disableResourcePackIncompatibleTip || packCompatibility.isCompatible();
+        return Configs.disableResourcePackIncompatibleTip.getBooleanValue() || packCompatibility.isCompatible();
     }
 }

@@ -32,11 +32,11 @@ public abstract class MixinGui {
             )
     )
     private void changeSidebarTitleBackgroundColor(Args args) {
-        if (Configs.featureCustomSidebarBackgroundColor) {
+        if (Configs.featureCustomSidebarBackgroundColor.getBooleanValue()) {
             //#if MC > 11502 && MC < 12000
             //$$ args.set(5, Configs.colorSidebarTitle.intValue);
             //#else
-            args.set(4, Configs.colorSidebarTitle.intValue);
+            args.set(4, Configs.colorSidebarTitle.getColor().intValue);
             //#endif
         }
     }
@@ -64,11 +64,11 @@ public abstract class MixinGui {
             )
     )
     private void changeSidebarContentBackgroundColor_1(Args args) {
-        if (Configs.featureCustomSidebarBackgroundColor) {
+        if (Configs.featureCustomSidebarBackgroundColor.getBooleanValue()) {
             //#if MC > 11502 && MC < 12000
             //$$ args.set(5, Configs.colorSidebarContent.intValue);
             //#else
-            args.set(4, Configs.colorSidebarContent.intValue);
+            args.set(4, Configs.colorSidebarContent.getColor().intValue);
             //#endif
         }
     }

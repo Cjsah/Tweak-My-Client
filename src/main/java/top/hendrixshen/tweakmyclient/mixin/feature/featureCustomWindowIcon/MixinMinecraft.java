@@ -55,7 +55,7 @@ public abstract class MixinMinecraft {
     //#endif
 
     private void updateIcon() {
-        if (Configs.featureCustomWindowIcon) {
+        if (Configs.featureCustomWindowIcon.getBooleanValue()) {
             IconUtil.updateIcon();
         }
     }

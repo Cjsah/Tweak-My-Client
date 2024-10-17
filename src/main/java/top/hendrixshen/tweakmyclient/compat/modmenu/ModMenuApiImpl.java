@@ -1,12 +1,12 @@
 package top.hendrixshen.tweakmyclient.compat.modmenu;
 
-import top.hendrixshen.magiclib.compat.modmenu.ModMenuCompatApi;
+import top.hendrixshen.magiclib.api.compat.modmenu.ModMenuApiCompat;
 import top.hendrixshen.tweakmyclient.TweakMyClientConfigGui;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 
-public class ModMenuApiImpl implements ModMenuCompatApi {
+public class ModMenuApiImpl implements ModMenuApiCompat {
     @Override
-    public ConfigScreenFactoryCompat<?> getConfigScreenFactoryCompat() {
+    public ModMenuApiCompat.ConfigScreenFactoryCompat<?> getConfigScreenFactoryCompat() {
         return (screen) -> {
             TweakMyClientConfigGui gui = TweakMyClientConfigGui.getInstance();
             //#if MC > 11903

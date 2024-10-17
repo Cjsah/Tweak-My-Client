@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.helper.AreaBox;
+import top.hendrixshen.tweakmyclient.helper.BreakingRestrictionBoxType;
 import top.hendrixshen.tweakmyclient.helper.Cache;
 
 public class RestrictionBoxRenderer implements IRenderer {
@@ -14,8 +15,8 @@ public class RestrictionBoxRenderer implements IRenderer {
 
     @Override
     public void render() {
-        switch (Configs.listBreakingRestrictionBoxType) {
-            case BLACKLIST:
+        switch (Configs.listBreakingRestrictionBoxType.getOptionListValue()) {
+            case BreakingRestrictionBoxType.BLACKLIST:
                 for (AreaBox areaBox : Cache.getInstance().getBreakingRestrictionBoxBlacklist()) {
                     GL11.glEnable(GL11.GL_LINE_SMOOTH);
                     GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
@@ -23,12 +24,12 @@ public class RestrictionBoxRenderer implements IRenderer {
                     RenderSystem.disableDepthTest();
                     RenderUtil.renderAreaOutline(areaBox, Cache.getInstance().getBreakingRestrictionBoxBlacklistModeOutlineColor());
                     RenderSystem.enableDepthTest();
-                    RenderUtil.renderAreaOverlay(areaBox, Configs.colorBreakingRestrictionBoxBlacklistMode);
+                    RenderUtil.renderAreaOverlay(areaBox, Configs.colorBreakingRestrictionBoxBlacklistMode.getColor());
                     GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
                     GL11.glDisable(GL11.GL_LINE_SMOOTH);
                 }
                 break;
-            case WHITELIST:
+            case BreakingRestrictionBoxType.WHITELIST:
                 for (AreaBox areaBox : Cache.getInstance().getBreakingRestrictionBoxWhiteList()) {
                     GL11.glEnable(GL11.GL_LINE_SMOOTH);
                     GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
@@ -36,16 +37,18 @@ public class RestrictionBoxRenderer implements IRenderer {
                     RenderSystem.disableDepthTest();
                     RenderUtil.renderAreaOutline(areaBox, Cache.getInstance().getBreakingRestrictionBoxWhitelistModeOutlineColor());
                     RenderSystem.enableDepthTest();
-                    RenderUtil.renderAreaOverlay(areaBox, Configs.colorBreakingRestrictionBoxWhitelistMode);
+                    RenderUtil.renderAreaOverlay(areaBox, Configs.colorBreakingRestrictionBoxWhitelistMode.getColor());
                     GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
                     GL11.glDisable(GL11.GL_LINE_SMOOTH);
                 }
+                break;
+            default:
                 break;
         }
     }
 
     @Override
     public boolean shouldRender() {
-        return Configs.featureBreakingRestrictionBox && TweakMyClient.getMinecraftClient().level != null;
+        return Configs.featureBreakingRestrictionBox.getBooleanValue() && TweakMyClient.getMinecraftClient().level != null;
     }
 }

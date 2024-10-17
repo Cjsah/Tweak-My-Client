@@ -13,35 +13,35 @@ public class TweakMyClientPredicate {
     public static class AllowBreakAnimation implements ConfigDependencyPredicate {
         @Override
         public boolean isSatisfied(ConfigOption option) {
-            return Configs.featureCustomBlockHitBoxOverlayFill && Configs.featureCustomBlockHitBoxOverlayOutline;
+            return Configs.featureCustomBlockHitBoxOverlayFill.getBooleanValue() && Configs.featureCustomBlockHitBoxOverlayOutline.getBooleanValue();
         }
     }
 
     public static class CustomWindowTitleEnableActivity implements ConfigDependencyPredicate {
         @Override
         public boolean isSatisfied(ConfigOption option) {
-            return Configs.customWindowTitleEnableActivity;
+            return Configs.customWindowTitleEnableActivity.getBooleanValue();
         }
     }
 
     public static class DebugMode implements ConfigDependencyPredicate {
         @Override
         public boolean isSatisfied(ConfigOption option) {
-            return Configs.debugMode;
+            return Configs.debugMode.getBooleanValue();
         }
     }
 
     public static class ExperimentalMode implements ConfigDependencyPredicate {
         @Override
         public boolean isSatisfied(ConfigOption option) {
-            return Configs.debugExperimentalMode && Configs.debugMode;
+            return Configs.debugExperimentalMode.getBooleanValue() && Configs.debugMode.getBooleanValue();
         }
     }
 
     public static class ExpXiBao implements ConfigDependencyPredicate {
         @Override
         public boolean isSatisfied(ConfigOption option) {
-            return Configs.debugExperimentalMode && Configs.debugMode &&
+            return Configs.debugExperimentalMode.getBooleanValue() && Configs.debugMode.getBooleanValue() &&
                     TweakMyClientPredicate.xibaoLang.contains(TweakMyClient.getMinecraftClient().options.languageCode);
         }
     }

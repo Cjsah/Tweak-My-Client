@@ -35,7 +35,7 @@ public abstract class MixinGui {
     )
     //#if MC > 11904
     private void onRenderTextureOverlay(GuiGraphics guiGraphics, ResourceLocation resourceLocation, float f, CallbackInfo ci) {
-        if (Configs.disableRenderOverlayPumpkin && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {
+        if (Configs.disableRenderOverlayPumpkin.getBooleanValue() && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {
     //#elseif MC > 11903
     //$$ private void onRenderTextureOverlay(PoseStack poseStack, ResourceLocation resourceLocation, float f, CallbackInfo ci) {
     //$$     if (Configs.disableRenderOverlayPumpkin && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {

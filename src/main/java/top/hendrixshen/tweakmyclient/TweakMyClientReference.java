@@ -4,10 +4,10 @@ import lombok.Getter;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import top.hendrixshen.magiclib.malilib.impl.ConfigManager;
-import top.hendrixshen.magiclib.util.FabricUtil;
-import top.hendrixshen.magiclib.util.StringUtil;
-import top.hendrixshen.tweakmyclient.config.ConfigHandler;
+import top.hendrixshen.magiclib.api.malilib.config.MagicConfigManager;
+import top.hendrixshen.magiclib.impl.malilib.config.GlobalConfigManager;
+import top.hendrixshen.magiclib.impl.malilib.config.MagicConfigHandler;
+import top.hendrixshen.magiclib.util.VersionUtil;
 
 public class TweakMyClientReference {
     @Getter
@@ -21,15 +21,15 @@ public class TweakMyClientReference {
     @Getter
     private static final String modVersion = FabricLoader.getInstance().getModContainer(modIdentifierCurrent).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
     @Getter
-    private static final String modVersionType = StringUtil.getVersionType(modVersion);
+    private static final String modVersionType = VersionUtil.getVersionType(modVersion);
     @Getter
     private static final Logger logger = LogManager.getLogger(TweakMyClientReference.getModIdentifier());
 
     private static final int configVersion = 1;
     @Getter
-    private static final ConfigManager configManager = ConfigManager.get(modIdentifier);
+    private static final MagicConfigManager configManager = GlobalConfigManager.getConfigManager(modIdentifier);
     @Getter
-    private static final ConfigHandler configHandler = new ConfigHandler(modIdentifier, configManager, configVersion);
+    private static final MagicConfigHandler configHandler = new MagicConfigHandler(configManager, configVersion);
 
     public static boolean isAuthMeLoaded = FabricUtil.isModLoaded("authme");
     public static boolean isHwylaLoaded = FabricUtil.isModLoaded("waila");

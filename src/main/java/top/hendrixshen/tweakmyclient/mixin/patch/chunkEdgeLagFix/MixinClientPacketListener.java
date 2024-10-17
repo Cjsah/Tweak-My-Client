@@ -3,13 +3,13 @@ package top.hendrixshen.tweakmyclient.mixin.patch.chunkEdgeLagFix;
 import org.spongepowered.asm.mixin.Mixin;
 
 //#if MC > 11904
-import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+import top.hendrixshen.magiclib.api.preprocess.DummyClass;
 //#else
 //$$ import net.minecraft.client.multiplayer.ClientPacketListener;
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//$$ import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-//$$ import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+//$$ import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+//$$ import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 //$$ import top.hendrixshen.tweakmyclient.config.Configs;
 //$$
 //#if MC > 11701

@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.projectile.FishingHook;
 import org.spongepowered.asm.mixin.gen.Invoker;
 //#else
-//$$ import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+//$$ import top.hendrixshen.magiclib.api.preprocess.DummyClass;
 //#endif
 
 //#if MC > 11502

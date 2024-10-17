@@ -1,8 +1,8 @@
 package top.hendrixshen.tweakmyclient;
 
+import fi.dy.masa.malilib.config.ConfigManager;
 import lombok.Getter;
-import top.hendrixshen.magiclib.malilib.impl.ConfigManager;
-import top.hendrixshen.magiclib.malilib.impl.gui.ConfigGui;
+import top.hendrixshen.magiclib.game.malilib.ConfigGui;
 import top.hendrixshen.tweakmyclient.config.ConfigCategory;
 import top.hendrixshen.tweakmyclient.util.StringUtil;
 

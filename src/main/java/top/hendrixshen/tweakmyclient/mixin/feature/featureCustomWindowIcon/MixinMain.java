@@ -38,7 +38,7 @@ public class MixinMain {
     //#else
     //$$ private static void finishInitializationRenderSystem(String[] strings, boolean bl, CallbackInfo ci) {
     //#endif
-        if (Configs.featureCustomWindowIcon) {
+        if (Configs.featureCustomWindowIcon.getBooleanValue()) {
             IconUtil.updateIcon();
         }
     }

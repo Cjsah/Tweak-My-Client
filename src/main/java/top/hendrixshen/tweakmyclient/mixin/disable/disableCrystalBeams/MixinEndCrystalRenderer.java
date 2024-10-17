@@ -53,8 +53,8 @@ public abstract class MixinEndCrystalRenderer extends EntityRenderer<EndCrystal>
     //#else
     //$$ private void onRenderCrystalBeams(EndCrystal endCrystal, double d, double e, double f, float g, float h, CallbackInfo ci) {
     //#endif
-        if (Configs.disableCrystalBeams) {
-            if (Configs.crystalBeamsDisableMode == CrystalBeamsDisableMode.TRACKING) {
+        if (Configs.disableCrystalBeams.getBooleanValue()) {
+            if (Configs.crystalBeamsDisableMode.getOptionListValue() == CrystalBeamsDisableMode.TRACKING) {
                 return;
             }
 

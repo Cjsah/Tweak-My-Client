@@ -24,8 +24,8 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             )
     )
     private void onTick(CallbackInfo ci) {
-        if (Configs.featureLowHealthWarning && this.getHealth() <= Configs.lowHealthThreshold) {
-            InfoUtils.printActionbarMessage("tweakmyclient.message.lowHealthWarning.warningMessage", String.format("%.2f", Configs.lowHealthThreshold));
+        if (Configs.featureLowHealthWarning.getBooleanValue() && this.getHealth() <= Configs.lowHealthThreshold.getDoubleValue()) {
+            InfoUtils.printActionbarMessage("tweakmyclient.message.lowHealthWarning.warningMessage", String.format("%.2f", Configs.lowHealthThreshold.getDoubleValue()));
         }
     }
 }

@@ -106,8 +106,8 @@ public abstract class MixinTheEndPortalRenderer {
 
     //#if MC > 11605
     private void onRenderCube(TheEndPortalBlockEntity theEndPortalBlockEntity, Matrix4f matrix4f, VertexConsumer vertexConsumer, CallbackInfo ci, float f, float g) {
-        if (Configs.endPortalRendererFix && Configs.enderPortalRenderMode != EnderPortalRenderMode.MODERN) {
-            if (Configs.enderPortalRenderMode == EnderPortalRenderMode.ACTUAL) {
+        if (Configs.endPortalRendererFix.getBooleanValue() && Configs.enderPortalRenderMode.getOptionListValue() != EnderPortalRenderMode.MODERN) {
+            if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.ACTUAL) {
                 // Render the ender portal using its hit box.
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, f, g, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, g, f, 0.0F, 0.0F, 0.0F, 0.0F, Direction.NORTH);
@@ -115,7 +115,7 @@ public abstract class MixinTheEndPortalRenderer {
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 0.0F, f, g, 0.0F, 1.0F, 1.0F, 0.0F, Direction.WEST);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, f, f, 0.0F, 0.0F, 1.0F, 1.0F, Direction.DOWN);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, g, g, 1.0F, 1.0F, 0.0F, 0.0F, Direction.UP);
-            } else if (Configs.enderPortalRenderMode == EnderPortalRenderMode.FULL) {
+            } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.FULL) {
                 // Render the end portal as a full block.
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Direction.NORTH);
@@ -123,7 +123,7 @@ public abstract class MixinTheEndPortalRenderer {
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.WEST);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, Direction.DOWN);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, Direction.UP);
-            } else if (Configs.enderPortalRenderMode == EnderPortalRenderMode.LEGACY) {
+            } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.LEGACY) {
                 // Minecraft 21w13a below.
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Direction.NORTH);

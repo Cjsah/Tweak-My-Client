@@ -24,7 +24,7 @@ public class OpenWaterHelperRenderer implements IRenderer {
         FishingHook fishHook = TweakMyClient.getMinecraftClient().player.fishing;
         assert fishHook != null;
         BlockPos fishHookPos = fishHook.blockPosition();
-        Color4f color = ((FishingHookAccessor) fishHook).invokeCalculateOpenWater(fishHook.blockPosition()) ? Configs.colorWaterOpen : Configs.colorWaterShallow;
+        Color4f color = ((FishingHookAccessor) fishHook).invokeCalculateOpenWater(fishHook.blockPosition()) ? Configs.colorWaterOpen.getColor() : Configs.colorWaterShallow.getColor();
         AreaBox areaBox = new AreaBox(fishHookPos.getX() - 2, fishHookPos.getY() - 3, fishHookPos.getZ() - 2,
                 fishHookPos.getX() + 2, fishHookPos.getY(), fishHookPos.getZ() + 2);
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
@@ -38,7 +38,7 @@ public class OpenWaterHelperRenderer implements IRenderer {
     @Override
     public boolean shouldRender() {
         //#if MC > 11502
-        return Configs.featureOpenWaterHelper && TweakMyClient.getMinecraftClient().player != null &&
+        return Configs.featureOpenWaterHelper.getBooleanValue() && TweakMyClient.getMinecraftClient().player != null &&
                 TweakMyClient.getMinecraftClient().player.fishing != null;
         //#else
         //$$ return false;

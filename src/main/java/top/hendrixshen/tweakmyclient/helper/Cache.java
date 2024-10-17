@@ -21,35 +21,35 @@ public class Cache {
 
     public void cacheAutoDropBlackList() {
         this.autoDropBlackList.clear();
-        this.autoDropBlackList.addAll(StringUtil.getItemStackSets(Configs.listAutoDropBlackList));
+        this.autoDropBlackList.addAll(StringUtil.getItemStackSets(Configs.listAutoDropBlackList.getStrings()));
     }
 
     public void cacheAutoDropWhiteList() {
         this.autoDropWhiteList.clear();
-        this.autoDropWhiteList.addAll(StringUtil.getItemStackSets(Configs.listAutoDropWhiteList));
+        this.autoDropWhiteList.addAll(StringUtil.getItemStackSets(Configs.listAutoDropWhiteList.getStrings()));
     }
 
     public void cacheBreakingRestrictionBoxBlacklistModeOutlineColor() {
-        this.breakingRestrictionBoxBlacklistModeOutlineColor = Color4f.fromColor(Configs.colorBreakingRestrictionBoxBlacklistMode, 1.0F);
+        this.breakingRestrictionBoxBlacklistModeOutlineColor = Color4f.fromColor(Configs.colorBreakingRestrictionBoxBlacklistMode.getColor(), 1.0F);
     }
 
     public void cacheBreakingRestrictionBoxWhitelistModeOutlineColor() {
-        this.breakingRestrictionBoxWhitelistModeOutlineColor = Color4f.fromColor(Configs.colorBreakingRestrictionBoxWhitelistMode, 1.0F);
+        this.breakingRestrictionBoxWhitelistModeOutlineColor = Color4f.fromColor(Configs.colorBreakingRestrictionBoxWhitelistMode.getColor(), 1.0F);
     }
 
     public void cacheBreakingRestrictionBoxBlacklist() {
         this.breakingRestrictionBoxBlacklist.clear();
-        this.breakingRestrictionBoxBlacklist.addAll(StringUtil.getAreaBoxSets(Configs.listBreakingRestrictionBoxBlacklist));
+        this.breakingRestrictionBoxBlacklist.addAll(StringUtil.getAreaBoxSets(Configs.listBreakingRestrictionBoxBlacklist.getStrings()));
     }
 
     public void cacheBreakingRestrictionBoxWhiteList() {
         this.breakingRestrictionBoxWhiteList.clear();
-        this.breakingRestrictionBoxWhiteList.addAll(StringUtil.getAreaBoxSets(Configs.listBreakingRestrictionBoxWhitelist));
+        this.breakingRestrictionBoxWhiteList.addAll(StringUtil.getAreaBoxSets(Configs.listBreakingRestrictionBoxWhitelist.getStrings()));
     }
 
     public void cacheItemGlowingBlackList() {
         this.itemGlowingBlackList.clear();
-        this.itemGlowingBlackList.addAll(StringUtil.getItemStackSets(Configs.listItemGlowingBlacklist));
+        this.itemGlowingBlackList.addAll(StringUtil.getItemStackSets(Configs.listItemGlowingBlacklist.getStrings()));
     }
 
     public HashSet<Item> getAutoDropBlackList() {

@@ -32,7 +32,7 @@ public abstract class MixinLevelRenderer {
     //#else
     //$$ private void onDrawBlockOutline(Camera camera, HitResult hitResult, int i, CallbackInfo ci) {
     //#endif
-        if (Configs.featureCustomBlockHitBoxOverlayOutline) {
+        if (Configs.featureCustomBlockHitBoxOverlayOutline.getBooleanValue()) {
             ci.cancel();
         }
     }

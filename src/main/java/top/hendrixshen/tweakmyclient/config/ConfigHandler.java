@@ -1,9 +1,10 @@
 package top.hendrixshen.tweakmyclient.config;
 
-import top.hendrixshen.magiclib.malilib.impl.ConfigManager;
+import fi.dy.masa.malilib.config.ConfigManager;
+import top.hendrixshen.magiclib.impl.malilib.config.MagicConfigHandler;
 import top.hendrixshen.tweakmyclient.helper.Cache;
 
-public class ConfigHandler extends top.hendrixshen.magiclib.malilib.impl.ConfigHandler {
+public class ConfigHandler extends MagicConfigHandler {
     public ConfigHandler(String modId, ConfigManager configManager, int configVersion) {
         super(modId, configManager, configVersion);
     }

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.tweakmyclient.config.Configs;
 //#else
-//$$ import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+//$$ import top.hendrixshen.magiclib.api.preprocess.DummyClass;
 //#endif
 
 //#if MC > 11502
@@ -27,8 +27,8 @@ public class MixinClientLevelClientLevelData {
             cancellable = true
     )
     private void onGetTimeOfDay(CallbackInfoReturnable<Long> cir) {
-        if (Configs.featureDaylightOverride) {
-            cir.setReturnValue((long) Configs.daylightOverrideTime);
+        if (Configs.featureDaylightOverride.getBooleanValue()) {
+            cir.setReturnValue((long) Configs.daylightOverrideTime.getIntegerValue());
         }
     }
     //#endif

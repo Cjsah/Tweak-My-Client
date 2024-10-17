@@ -29,7 +29,7 @@ public class MixinBossHealthOverlay {
     //#else
     //$$ private void onRender(CallbackInfo ci) {
     //#endif
-        if (Configs.disableRenderBossBar) {
+        if (Configs.disableRenderBossBar.getBooleanValue()) {
             ci.cancel();
         }
     }

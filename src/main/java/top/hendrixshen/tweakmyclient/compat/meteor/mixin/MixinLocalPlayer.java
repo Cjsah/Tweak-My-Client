@@ -6,8 +6,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.compat.meteor.MeteorHelper;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.util.mixin.MixinType;
@@ -15,7 +15,7 @@ import top.hendrixshen.tweakmyclient.util.mixin.annotation.MagicAttack;
 import top.hendrixshen.tweakmyclient.util.mixin.annotation.MagicInterruption;
 
 @MagicInterruption(targets = "meteordevelopment.meteorclient.mixin.ClientPlayerEntityMixin")
-@Dependencies(and = @Dependency(value = "meteor-client"))
+@Dependencies(require = @Dependency(value = "meteor-client"))
 @Mixin(value = LocalPlayer.class, priority = 1100)
 public abstract class MixinLocalPlayer extends LivingEntity {
     @Shadow
@@ -33,7 +33,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             desc = "()V"
     )
     private boolean tmc$getUsingItemState(LocalPlayer instance) {
-        if (Configs.disableSlowdown || MeteorHelper.isNoSlowdownHackEnable()) {
+        if (Configs.disableSlowdown.getBooleanValue() || MeteorHelper.isNoSlowdownHackEnable()) {
             return false;
         }
         return this.startedUsingItem;

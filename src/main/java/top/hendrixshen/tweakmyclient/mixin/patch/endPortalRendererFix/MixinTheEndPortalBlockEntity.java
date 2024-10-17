@@ -19,11 +19,11 @@ public class MixinTheEndPortalBlockEntity {
             cancellable = true
     )
     private void shouldRenderFace(Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.endPortalRendererFix) {
+        if (Configs.endPortalRendererFix.getBooleanValue()) {
             //#if MC > 11605
-            if (Configs.enderPortalRenderMode == EnderPortalRenderMode.LEGACY) {
+            if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.LEGACY) {
                 cir.setReturnValue(direction == Direction.UP);
-            } else if (Configs.enderPortalRenderMode != EnderPortalRenderMode.MODERN) {
+            } else if (Configs.enderPortalRenderMode.getOptionListValue() != EnderPortalRenderMode.MODERN) {
             //#else
             //$$ if (Configs.enderPortalRenderMode == EnderPortalRenderMode.MODERN) {
             //$$     cir.setReturnValue(direction.getAxis() == Direction.Axis.Y);

@@ -1,8 +1,12 @@
 pluginManagement {
     repositories {
-        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
+
+        maven {
+            name("NyanMaven Mirror")
+            url("https://maven.hendrixshen.top/mirror")
+        }
 
         maven {
             name("Fabric")
@@ -24,6 +28,16 @@ pluginManagement {
             url("https://server.bbkr.space/artifactory/libs-release")
         }
     }
+    resolutionStrategy {
+        eachPlugin {
+            switch (requested.id.id) {
+                case "com.replaymod.preprocess": {
+                    useModule("com.github.Fallen-Breath:preprocessor:${requested.version}")
+                    break
+                }
+            }
+        }
+    }
 }
 
 def versions = Arrays.asList(
@@ -38,6 +52,7 @@ def versions = Arrays.asList(
         "1.20.1",
         "1.20.2",
         "1.20.4",
+        "1.21.1",
 )
 
 for (String version : versions) {
